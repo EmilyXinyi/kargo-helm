@@ -23,7 +23,7 @@ spec:
       steps:
       - uses: git-clone
         config:
-          repoURL: https://github.com/EmilyXinyi/kargo-helm.git
+          repoURL: https://github.com/emilyxinyi/kargo-helm.git
           checkout:
           - fromFreight: true
             path: ./src
@@ -35,7 +35,7 @@ spec:
         config:
           path: ./out/env/dev/values.yaml
           images:
-          - image: ghcr.io/EmilyXinyi/guestbook
+          - image: ghcr.io/emilyxinyi/guestbook
             key: image.tag
             value: Tag
 
@@ -62,5 +62,5 @@ spec:
           apps:
           - name: kargo-helm-dev
             sources:
-            - repoURL: https://github.com/EmilyXinyi/kargo-helm.git
+            - repoURL: https://github.com/emilyxinyi/kargo-helm.git
               desiredCommitFromStep: commit
