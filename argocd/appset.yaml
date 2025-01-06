@@ -18,7 +18,7 @@ spec:
     spec:
       destination:
         namespace: kargo-helm-{{path.basename}}
-        name: mac2
+        name: demo
       project: kargo-helm
       source:
         path: charts/guestbook
