@@ -5,8 +5,8 @@ metadata:
   namespace: argocd
 spec:
   clusterResourceWhitelist:
-  - group: ""
-    kind: Namespace
+  - group: '*'
+    kind: '*'
   destinations:
   - name: '*'
     namespace: '*'
