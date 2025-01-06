@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kargo-helm
+spec:
+  project: kargo-helm
+  source:
+    repoURL: https://github.com/emilyxinyi/kargo-helm.git
+    path: kargo
+  destination:
+    server: https://cc19n7e2dnosprep-cplane.kargosvcs.akuity.cloud
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
