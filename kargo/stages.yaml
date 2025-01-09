@@ -25,9 +25,10 @@ spec:
         config:
           repoURL: https://github.com/emilyxinyi/kargo-helm.git
           checkout:
-          - fromFreight: true
-            path: ./src
           - branch: main
+            path: ./src
+          - branch: stage/dev
+            create: true
             path: ./out
 
       - uses: helm-update-image

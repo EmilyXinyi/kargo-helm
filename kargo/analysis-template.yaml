@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: analysistemplate-verification
-  namespace: guestbook
+  name: test-verification
+  namespace: kargo-helm
 spec:
   metrics:
     - name: test
