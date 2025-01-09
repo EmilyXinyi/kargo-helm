@@ -64,3 +64,72 @@ spec:
             sources:
             - repoURL: https://github.com/emilyxinyi/kargo-helm.git
               desiredCommitFromStep: commit
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: test
+  namespace: kargo-helm
+  annotations:
+    kargo.akuity.io/color: yellow
+spec:
+  shard: kargo-agent
+  requestedFreight:
+  - origin:
+      kind: Warehouse
+      name: guestbook
+    sources:
+      stages: 
+      - dev
+  - origin:
+      kind: Warehouse
+      name: features
+    sources:
+      stages: 
+      - dev
+  promotionTemplate:
+    spec:
+      steps:
+      - uses: git-clone
+        config:
+          repoURL: https://github.com/emilyxinyi/kargo-helm.git
+          checkout:
+          - fromFreight: true
+            path: ./src
+          - branch: main
+            path: ./out
+
+      - uses: helm-update-image
+        as: update-image
+        config:
+          path: ./out/env/test/values.yaml
+          images:
+          - image: ghcr.io/emilyxinyi/guestbook
+            key: image.tag
+            value: Tag
+
+      - uses: copy
+        config:
+          inPath: ./src/base/feature-flags.yaml
+          outPath: ./out/env/test/feature-flags.yaml
+
+      # Commit the changes to the Git repository.
+      - uses: git-commit
+        as: commit
+        config:
+          path: ./out
+          messageFromSteps:
+          - update-image
+
+      # Push the changes to the Git repository.
+      - uses: git-push
+        config:
+          path: ./out
+
+      - uses: argocd-update
+        config:
+          apps:
+          - name: kargo-helm-test
+            sources:
+            - repoURL: https://github.com/emilyxinyi/kargo-helm.git
+              desiredCommitFromStep: commit
