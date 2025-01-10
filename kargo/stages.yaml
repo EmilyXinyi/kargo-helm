@@ -135,7 +135,7 @@ spec:
               desiredCommitFromStep: commit
   verification:
     analysisTemplates:
-    - name: test-verification
+    - name: staging-verification
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
