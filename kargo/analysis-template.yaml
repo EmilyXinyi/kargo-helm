@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: test-verification
+  name: staging-verification
   namespace: kargo-helm
 spec:
   metrics:
