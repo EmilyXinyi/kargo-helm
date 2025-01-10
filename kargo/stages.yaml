@@ -152,14 +152,14 @@ spec:
       name: guestbook
     sources:
       stages: 
-      - test
+      - staging
   - origin:
       kind: Warehouse
       name: features
     sources:
       sources:
       stages: 
-      - test
+      - staging
   promotionTemplate:
     spec:
       steps:
