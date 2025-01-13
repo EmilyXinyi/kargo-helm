@@ -63,7 +63,7 @@ spec:
           - name: kargo-helm-dev
             sources:
             - repoURL: https://github.com/emilyxinyi/kargo-helm.git
-              desiredCommitFromStep: commit
+              # desiredCommitFromStep: commit
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
@@ -132,7 +132,7 @@ spec:
           - name: kargo-helm-staging
             sources:
             - repoURL: https://github.com/emilyxinyi/kargo-helm.git
-              desiredCommitFromStep: commit
+              # desiredCommitFromStep: commit
   verification:
     analysisTemplates:
     - name: staging-verification
@@ -205,4 +205,4 @@ spec:
           - name: kargo-helm-prod
             sources:
             - repoURL: https://github.com/emilyxinyi/kargo-helm.git
-              desiredCommitFromStep: commit
+              # desiredCommitFromStep: commit
