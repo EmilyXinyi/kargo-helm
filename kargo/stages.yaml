@@ -131,6 +131,18 @@ spec:
           - name: kargo-helm-staging
             sources:
             - repoURL: https://github.com/emilyxinyi/kargo-helm.git
+      - uses: http
+        as: cat-facts
+        config:
+          method: GET
+          url: https://www.catfacts.net/api/
+          outputs:
+          - name: status
+            fromExpression: response.status
+          - name: fact1
+            fromExpression: response.body.facts[0]
+          - name: fact2
+            fromExpression: response.body.facts[1]
   verification:
     analysisTemplates:
     - name: staging-verification
