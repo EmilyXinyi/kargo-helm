@@ -25,7 +25,8 @@ spec:
         config:
           repoURL: https://github.com/emilyxinyi/kargo-helm.git
           checkout:
-          - fromFreight: true
+          # - fromFreight: true
+          - branch: main
             path: ./src
           - branch: main
             path: ./out
@@ -93,7 +94,8 @@ spec:
         config:
           repoURL: https://github.com/emilyxinyi/kargo-helm.git
           checkout:
-          - fromFreight: true
+          - branch: main
+          # - fromFreight: true
             path: ./src
           - branch: main
             path: ./out
@@ -177,7 +179,8 @@ spec:
         config:
           repoURL: https://github.com/emilyxinyi/kargo-helm.git
           checkout:
-          - fromFreight: true
+          # - fromFreight: true
+          - branch: main
             path: ./src
           - branch: main
             path: ./out
