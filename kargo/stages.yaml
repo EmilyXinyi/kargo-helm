@@ -25,26 +25,16 @@ spec:
         value: ghcr.io/emilyxinyi/guestbook
       - name: repo
         value: https://github.com/emilyxinyi/kargo-helm.git
+      
       steps:
       - uses: git-clone
         config:
           repoURL: ${{ vars.repo }}
           checkout:
-          # - fromFreight: true
-          # - branch: main
           - commit: ${{ commitFrom( vars.repo ).ID }}
             path: ./src
           - branch: main
             path: ./out
-
-      # - uses: helm-update-image
-      #   as: update-image
-      #   config:
-      #     path: ./out/env/dev/values.yaml
-      #     images:
-      #     - image: ghcr.io/emilyxinyi/guestbook
-      #       key: image.tag
-      #       value: Tag
 
       - uses: yaml-update
         as: update-image
@@ -103,25 +93,29 @@ spec:
       - dev
   promotionTemplate:
     spec:
+      vars: 
+      - name: image
+        value: ghcr.io/emilyxinyi/guestbook
+      - name: repo
+        value: https://github.com/emilyxinyi/kargo-helm.git
+      
       steps:
       - uses: git-clone
         config:
-          repoURL: https://github.com/emilyxinyi/kargo-helm.git
+          repoURL: ${{ vars.repo }}
           checkout:
-          - branch: main
-          # - fromFreight: true
+          - commit: ${{ commitFrom( vars.repo ).ID }}
             path: ./src
           - branch: main
             path: ./out
 
-      - uses: helm-update-image
+      - uses: yaml-update
         as: update-image
         config:
           path: ./out/env/staging/values.yaml
-          images:
-          - image: ghcr.io/emilyxinyi/guestbook
-            key: image.tag
-            value: Tag
+          updates:
+          - key: image.tag
+            value: ${{ imageFrom( vars.image ).Tag }}
 
       - uses: copy
         config:
@@ -188,25 +182,29 @@ spec:
       - staging
   promotionTemplate:
     spec:
+      vars: 
+      - name: image
+        value: ghcr.io/emilyxinyi/guestbook
+      - name: repo
+        value: https://github.com/emilyxinyi/kargo-helm.git
+      
       steps:
       - uses: git-clone
         config:
-          repoURL: https://github.com/emilyxinyi/kargo-helm.git
+          repoURL: ${{ vars.repo }}
           checkout:
-          # - fromFreight: true
-          - branch: main
+          - commit: ${{ commitFrom( vars.repo ).ID }}
             path: ./src
           - branch: main
             path: ./out
 
-      - uses: helm-update-image
+      - uses: yaml-update
         as: update-image
         config:
           path: ./out/env/prod/values.yaml
-          images:
-          - image: ghcr.io/emilyxinyi/guestbook
-            key: image.tag
-            value: Tag
+          updates:
+          - key: image.tag
+            value: ${{ imageFrom( vars.image ).Tag }}
 
       - uses: copy
         config:
