@@ -20,6 +20,11 @@ spec:
       direct: true
   promotionTemplate:
     spec:
+      vars: 
+      - name: image
+        value: ghcr.io/emilyxinyi/guestbook
+      - name: repo
+        value: https://github.com/emilyxinyi/kargo-helm.git
       steps:
       - uses: git-clone
         config:
@@ -27,7 +32,7 @@ spec:
           checkout:
           # - fromFreight: true
           # - branch: main
-          - commit: ${{ commitFrom(https://github.com/emilyxinyi/kargo-helm.git).ID }}
+          - commit: ${{ commitFrom( vars.repo ).ID }}
             path: ./src
           - branch: main
             path: ./out
