@@ -37,14 +37,22 @@ spec:
           - branch: main
             path: ./out
 
-      - uses: helm-update-image
+      # - uses: helm-update-image
+      #   as: update-image
+      #   config:
+      #     path: ./out/env/dev/values.yaml
+      #     images:
+      #     - image: ghcr.io/emilyxinyi/guestbook
+      #       key: image.tag
+      #       value: Tag
+
+      - uses: yaml-update
         as: update-image
         config:
           path: ./out/env/dev/values.yaml
-          images:
-          - image: ghcr.io/emilyxinyi/guestbook
-            key: image.tag
-            value: Tag
+          updates:
+          - key: image.tag
+            value: ${{ imageFrom( vars.image ).Tag }}
 
       - uses: copy
         config:

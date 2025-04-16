@@ -21,7 +21,7 @@ spec:
   subscriptions:
   - git:
       branch: main
-      commitSelectionStrategy: NewestFromBranch
+      # commitSelectionStrategy: NewestFromBranch
       discoveryLimit: 20
       repoURL: https://github.com/emilyxinyi/kargo-helm.git
       includePaths:
